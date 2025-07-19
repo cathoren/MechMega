@@ -1,0 +1,121 @@
+
+{
+  "samples": [
+    {
+      "id": "fdm-1",
+      "title": "Automotive Prototype",
+      "technology": "FDM",
+      "material": "PLA-CF",
+      "description": "High-strength carbon fiber reinforced prototype",
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop",
+      "specs": {
+        "layerHeight": "0.2mm",
+        "infill": "80%",
+        "printTime": "12 hours"
+      }
+    },
+    {
+      "id": "sla-1",
+      "title": "Miniature Detail",
+      "technology": "SLA",
+      "material": "High Tough Resin",
+      "description": "Ultra-fine detail miniature with smooth surface finish",
+      "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=400&h=300&fit=crop",
+      "specs": {
+        "layerHeight": "0.05mm",
+        "accuracy": "±0.1mm",
+        "finish": "Polished"
+      }
+    },
+    {
+      "id": "sls-1",
+      "title": "Functional Parts",
+      "technology": "SLS",
+      "material": "PA-12",
+      "description": "Production-ready functional components",
+      "image": "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop",
+      "specs": {
+        "strength": "High",
+        "durability": "Industrial Grade",
+        "finish": "Natural"
+      }
+    },
+    {
+      "id": "mjf-1",
+      "title": "Complex Geometries",
+      "technology": "MJF",
+      "material": "PA-12",
+      "description": "Complex internal structures and fine details",
+      "image": "https://images.unsplash.com/photo-1487058792275-0ad4aaf24ca7?w=400&h=300&fit=crop",
+      "specs": {
+        "resolution": "0.1mm",
+        "complexity": "High",
+        "speed": "Fast"
+      }
+    },
+    {
+      "id": "polyjet-1",
+      "title": "Multi-Material Print",
+      "technology": "Polyjet",
+      "material": "Multi-Material",
+      "description": "Multiple materials and colors in single print",
+      "image": "https://images.unsplash.com/photo-1487887235947-a955ef187fcc?w=400&h=300&fit=crop",
+      "specs": {
+        "materials": "5 Different",
+        "colors": "Full Color",
+        "finish": "Smooth"
+      }
+    },
+    {
+      "id": "metal-1",
+      "title": "Aerospace Component",
+      "technology": "Metal",
+      "material": "Titanium Ti-6Al-4V",
+      "description": "High-performance aerospace grade components",
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=300&fit=crop",
+      "specs": {
+        "strength": "Aerospace Grade",
+        "density": "99.5%",
+        "finish": "Machined"
+      }
+    }
+  ],
+  "technologies": [
+    {
+      "name": "FDM",
+      "fullName": "Fused Deposition Modeling",
+      "description": "Layer-by-layer extrusion of thermoplastic materials for rapid prototyping and production",
+      "color": "#3B82F6"
+    },
+    {
+      "name": "SLA",
+      "fullName": "Stereolithography",
+      "description": "High-precision resin printing with exceptional surface quality and fine details",
+      "color": "#10B981"
+    },
+    {
+      "name": "SLS",
+      "fullName": "Selective Laser Sintering",
+      "description": "Powder-based printing for strong, functional parts without support structures",
+      "color": "#F59E0B"
+    },
+    {
+      "name": "MJF",
+      "fullName": "Multi Jet Fusion",
+      "description": "Fast, high-quality production with excellent mechanical properties",
+      "color": "#8B5CF6"
+    },
+    {
+      "name": "Polyjet",
+      "fullName": "Polyjet Technology",
+      "description": "Multi-material printing with photopolymer resins for detailed prototypes",
+      "color": "#EF4444"
+    },
+    {
+      "name": "Metal",
+      "fullName": "Metal 3D Printing",
+      "description": "Direct metal laser sintering for high-strength industrial applications",
+      "color": "#6B7280"
+    }
+  ]
+}
