@@ -179,11 +179,11 @@
     }
 
     .saas-section {
-        @apply py-8 md:py-12 lg:py-16 xl:py-24 relative;
+        @apply py-8 md:py-12 lg:py-16 xl:py-24 relative xl:px-36;
     }
 
     .saas-container {
-        @apply container mx-auto px-4 relative;
+        @apply container mx-auto px-4 md:px-10 relative;
         max-width: 2480px;
     }
 
@@ -546,4 +546,47 @@ ul li {
 
 .modal-content[data-state="closed"] {
     animation: modal-out 0.15s ease-in;
+}
+
+/* Loading Screen Animations */
+@keyframes loading-progress {
+    0% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.animate-loading-progress {
+    animation: loading-progress 2s ease-in-out infinite;
+}
+
+/* Loading dots stagger animation */
+@keyframes bounce-delay {
+    0%,
+    80%,
+    100% {
+        transform: scale(0);
+    }
+    40% {
+        transform: scale(1);
+    }
+}
+
+.animate-bounce-1 {
+    animation: bounce-delay 1.4s infinite ease-in-out both;
+}
+
+.animate-bounce-2 {
+    animation: bounce-delay 1.4s infinite ease-in-out both;
+    animation-delay: -0.32s;
+}
+
+.animate-bounce-3 {
+    animation: bounce-delay 1.4s infinite ease-in-out both;
+    animation-delay: -0.16s;
 }

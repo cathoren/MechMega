@@ -9,6 +9,10 @@ import {
     connectFirestoreEmulator,
     enableNetwork,
     disableNetwork,
+    enableIndexedDbPersistence,
+    initializeFirestore,
+    persistentLocalCache,
+    persistentMultipleTabManager,
 } from "firebase/firestore";
 import { getStorage, connectStorageEmulator } from "firebase/storage";
 
@@ -50,16 +54,44 @@ validateFirebaseConfig();
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firebase services
+// Initialize Firebase services with optimization
 export const auth = getAuth(app);
-export const db = getFirestore(app);
+
+// Initialize Firestore with persistent cache for better performance
+export const db = initializeFirestore(app, {
+    localCache: persistentLocalCache({
+        tabManager: persistentMultipleTabManager(),
+    }),
+});
+
 export const storage = getStorage(app);
 
-// Initialize Google Auth Provider
+// Initialize Google Auth Provider with optimized settings
 export const googleProvider = new GoogleAuthProvider();
 googleProvider.setCustomParameters({
     prompt: "select_account",
 });
+googleProvider.addScope("profile");
+googleProvider.addScope("email");
+
+// Enable offline persistence for better performance
+const enableOfflineSupport = async () => {
+    try {
+        // This will be handled by the new persistent cache
+        console.log("Offline support enabled with persistent cache");
+    } catch (error: any) {
+        if (error.code === "failed-precondition") {
+            console.warn("Offline persistence failed - multiple tabs open");
+        } else if (error.code === "unimplemented") {
+            console.warn("Offline persistence not available in this browser");
+        } else {
+            console.error("Error enabling offline persistence:", error);
+        }
+    }
+};
+
+// Initialize offline support
+enableOfflineSupport();
 
 // Network status utilities
 export const enableFirestoreNetwork = async () => {

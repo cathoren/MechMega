@@ -108,7 +108,7 @@ const SignupForm: React.FC<SignupFormProps> = ({
     return (
         <Card className="w-full border-0 shadow-none">
             <CardHeader className="space-y-2 text-center">
-                <CardTitle className="text-2xl font-bold bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700   px-4 py-2 rounded-lg shadow-lg hover:shadow-xl bg-clip-text text-transparent">
+                <CardTitle className=" text-2xl font-bold bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700   px-4 py-2  bg-clip-text text-transparent">
                     Create Account
                 </CardTitle>
                 <CardDescription className="text-slate-600 dark:text-slate-400">

@@ -61,6 +61,47 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     const [firebaseUser, setFirebaseUser] = useState<FirebaseUser | null>(null);
     const [isLoading, setIsLoading] = useState(true);
 
+    // Cache user profiles in localStorage for faster loading
+    const cacheUserProfile = (profile: UserProfile) => {
+        try {
+            localStorage.setItem(
+                `userProfile_${profile.id}`,
+                JSON.stringify({
+                    ...profile,
+                    createdAt: profile.createdAt.toISOString(),
+                    updatedAt: profile.updatedAt.toISOString(),
+                })
+            );
+        } catch (error) {
+            console.warn("Failed to cache user profile:", error);
+        }
+    };
+
+    const getCachedUserProfile = (uid: string): UserProfile | null => {
+        try {
+            const cached = localStorage.getItem(`userProfile_${uid}`);
+            if (cached) {
+                const profile = JSON.parse(cached);
+                return {
+                    ...profile,
+                    createdAt: new Date(profile.createdAt),
+                    updatedAt: new Date(profile.updatedAt),
+                };
+            }
+        } catch (error) {
+            console.warn("Failed to get cached user profile:", error);
+        }
+        return null;
+    };
+
+    const clearCachedUserProfile = (uid: string) => {
+        try {
+            localStorage.removeItem(`userProfile_${uid}`);
+        } catch (error) {
+            console.warn("Failed to clear cached user profile:", error);
+        }
+    };
+
     // Create user profile in Firestore
     const createUserProfile = async (
         firebaseUser: FirebaseUser,
@@ -132,11 +173,34 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
         return null;
     };
 
-    // Fetch user profile from Firestore
+    // Fetch user profile from Firestore with caching
     const fetchUserProfile = async (
         uid: string,
+        useCache = true,
         retries = 3
     ): Promise<UserProfile | null> => {
+        // Try to get from cache first if enabled
+        if (useCache) {
+            const cachedProfile = getCachedUserProfile(uid);
+            if (cachedProfile) {
+                console.log("Using cached user profile");
+                // Start background fetch to update cache
+                fetchUserProfile(uid, false, 1)
+                    .then((freshProfile) => {
+                        if (
+                            freshProfile &&
+                            JSON.stringify(freshProfile) !==
+                                JSON.stringify(cachedProfile)
+                        ) {
+                            setUser(freshProfile);
+                            cacheUserProfile(freshProfile);
+                        }
+                    })
+                    .catch(console.warn);
+                return cachedProfile;
+            }
+        }
+
         for (let attempt = 1; attempt <= retries; attempt++) {
             try {
                 const userRef = doc(db, "users", uid);
@@ -145,7 +209,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
                 if (userSnap.exists()) {
                     const userData = userSnap.data() as UserProfile;
                     // Convert Firestore timestamps to Date objects
-                    return {
+                    const profile = {
                         ...userData,
                         createdAt:
                             userData.createdAt instanceof Date
@@ -156,6 +220,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
                                 ? userData.updatedAt
                                 : new Date(userData.updatedAt),
                     };
+
+                    // Cache the fresh profile
+                    cacheUserProfile(profile);
+                    return profile;
                 }
                 return null;
             } catch (error: any) {
@@ -177,7 +245,17 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
                     continue;
                 }
 
-                // If it's a critical error or we're out of retries, return null
+                // If it's a critical error or we're out of retries, return cached if available
+                if (attempt === retries && useCache) {
+                    const cachedProfile = getCachedUserProfile(uid);
+                    if (cachedProfile) {
+                        console.log(
+                            "Using cached profile due to fetch failure"
+                        );
+                        return cachedProfile;
+                    }
+                }
+
                 if (attempt === retries) {
                     console.error(
                         "Max retries reached for fetching user profile"
@@ -296,6 +374,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
     };
     const logout = async (): Promise<void> => {
         try {
+            // Clear cached profile before signing out
+            if (firebaseUser) {
+                clearCachedUserProfile(firebaseUser.uid);
+            }
             await signOut(auth);
         } catch (error) {
             console.error("Logout error:", error);
@@ -316,8 +398,10 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({
 
             await updateDoc(userRef, updateData);
 
-            // Update local state
-            setUser((prev) => (prev ? { ...prev, ...updateData } : null));
+            // Update local state and cache
+            const updatedUser = { ...user, ...updateData };
+            setUser(updatedUser);
+            cacheUserProfile(updatedUser);
 
             return true;
         } catch (error) {

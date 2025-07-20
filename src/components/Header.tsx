@@ -87,10 +87,7 @@ const Header = () => {
                             </Button>
                         </div>
                     ) : (
-                        <div className="hidden sm:flex items-center space-x-3">
-                            <span className="text-sm text-slate-200 hidden md:block">
-                                Welcome, {user?.name}
-                            </span>
+                        <div className="max-lg:hidden flex flex-col items-center space-x-3">
                             <DropdownMenu>
                                 <DropdownMenuTrigger asChild>
                                     <Button
@@ -100,6 +97,9 @@ const Header = () => {
                                         <User className="w-4 h-4 text-slate-200" />
                                     </Button>
                                 </DropdownMenuTrigger>
+                                <span className="text-sm text-slate-200 hidden md:block text-center">
+                                    Welcome, {user?.name}
+                                </span>
                                 <DropdownMenuContent
                                     align="end"
                                     className="w-48">

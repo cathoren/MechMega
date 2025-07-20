@@ -13,17 +13,11 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/hooks/use-toast";
-import {
-    User,
-    Mail,
-    Phone,
-    Building,
-    MapPin,
-    Bell,
-    Settings,
-} from "lucide-react";
+import { User, MapPin, Settings } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const ProfilePage: React.FC = () => {
     const { user, updateUserProfile, isLoading } = useAuth();
@@ -89,6 +83,10 @@ const ProfilePage: React.FC = () => {
         setIsSaving(false);
     };
 
+    if (isLoading) {
+        return <LoadingScreen message="Loading your profile..." />;
+    }
+
     if (!user) {
         return (
             <div className="min-h-screen">
@@ -104,7 +102,7 @@ const ProfilePage: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-background my-10 ">
             <Header />
             <main className="pt-28 pb-16">
                 <div className="container mx-auto px-4 max-w-4xl">
@@ -201,10 +199,15 @@ const ProfilePage: React.FC = () => {
                                     <Button
                                         type="submit"
                                         disabled={isSaving}
-                                        className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
-                                        {isSaving
-                                            ? "Saving..."
-                                            : "Save Changes"}
+                                        className="w-full bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700">
+                                        {isSaving ? (
+                                            <LoadingSpinner
+                                                size="sm"
+                                                message="Saving..."
+                                            />
+                                        ) : (
+                                            "Save Changes"
+                                        )}
                                     </Button>
                                 </form>
                             </CardContent>
