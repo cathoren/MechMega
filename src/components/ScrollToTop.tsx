@@ -13,12 +13,12 @@ const ScrollToTop = () => {
                 return;
             }
         }
-        
+
         // Otherwise scroll to top when the route changes
         window.scrollTo({
             top: 0,
             left: 0,
-            behavior: "smooth"
+            behavior: "smooth",
         });
     }, [pathname, hash]);
 
