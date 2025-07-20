@@ -18,16 +18,15 @@ const Technologies = () => {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6 md:gap-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3  gap-6 md:gap-8 items-center justify-center">
                     {technologies.map((tech, index) => {
-                        const IconComponent = tech.icon;
                         return (
                             <Card
                                 key={tech.name}
-                                className="tech-card group animate-slide-up relative overflow-hidden h-full"
+                                className="tech-card group animate-slide-up relative overflow-hidden h-full sm:w-5/6 mx-auto"
                                 style={{ animationDelay: `${index * 100}ms` }}>
                                 {/* Image Section */}
-                                <div className="relative h-40 md:h-60 overflow-hidden">
+                                <div className="relative h-40 md:h-80 overflow-hidden">
                                     <img
                                         src={tech.image}
                                         alt={tech.fullName}

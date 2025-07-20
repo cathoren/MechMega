@@ -142,7 +142,7 @@
     .dark body::before {
         background: radial-gradient(
                 circle at 20% 50%,
-                rgba(37, 99, 235, 0.4) 0%,
+                lch(46.06% 80.06 292.76 / 0.4) 0%,
                 transparent 50%
             ),
             radial-gradient(
@@ -179,7 +179,7 @@
     }
 
     .saas-section {
-        @apply py-8 md:py-12 lg:py-16 xl:py-24 relative xl:px-36;
+        @apply py-8 md:py-12 lg:py-16 xl:py-24 relative xl:px-36 my-16 md:my-10;
     }
 
     .saas-container {
@@ -588,4 +588,40 @@ ul li {
 .animate-bounce-3 {
     animation: bounce-delay 1.4s infinite ease-in-out both;
     animation-delay: -0.16s;
+}
+
+/* Smart Header Animations */
+.header-slide-down {
+    transform: translateY(-100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.header-slide-up {
+    transform: translateY(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Header and Footer Background - Consistent Dark Theme */
+.header-footer-background {
+    /* Dark background that doesn't change with theme */
+    background: linear-gradient(
+        135deg,
+        hsl(222, 47%, 11%) 0%,
+        hsl(220, 43%, 16%) 50%,
+        hsl(222, 47%, 11%) 100%
+    );
+    /* Add subtle border */
+    border-color: hsl(220, 13%, 20%) !important;
+}
+
+.footer-background {
+    /* Same dark background as header */
+    background: linear-gradient(
+        135deg,
+        hsl(222, 47%, 11%) 0%,
+        hsl(220, 43%, 16%) 50%,
+        hsl(222, 47%, 11%) 100%
+    );
+    /* Add subtle border */
+    border-color: hsl(220, 13%, 20%) !important;
 }

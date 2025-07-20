@@ -34,7 +34,7 @@ const NetworkStatus: React.FC = () => {
     if (!showAlert) return null;
 
     return (
-        <div className="fixed top-20 left-4 right-4 z-50 md:left-auto md:right-4 md:w-96">
+        <div className="fixed bottom-4 right-4 z-50 w-96 max-w-[calc(100vw-2rem)]">
             <Alert
                 className={`shadow-lg border-l-4 ${
                     isOnline
