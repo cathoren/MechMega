@@ -75,7 +75,6 @@ const Contact = () => {
                                 </Button>
                             </CardContent>
                         </Card>
-
                         <Card className="hover:shadow-lg transition-shadow duration-300 tech-card">
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-3 text-primary text-lg md:text-xl">

@@ -60,7 +60,7 @@ const Header = () => {
         <>
             {/* Header */}
             <header
-                className={`fixed top-0 z-50 w-full h-28 header-footer-background transition-all duration-500 ease-in-out ${
+                className={`fixed top-0 z-50 w-full h-20 md:h-28 header-footer-background transition-all duration-500 ease-in-out ${
                     isVisible
                         ? "translate-y-0 shadow-lg"
                         : "-translate-y-full shadow-none"
@@ -76,8 +76,8 @@ const Header = () => {
                                 />
                             </Link>
                         </div>
-                        <div className="absolute bottom-[-10px] sm:bottom-[-15px] left-0 right-0 text-center">
-                            <p className="text-bold text-sm lg:text-base text-primary">
+                        <div className="absolute bottom-[-10px] sm:bottom-[-12px] left-0 right-0 text-center">
+                            <p className="max-md:hidden text-bold text-sm lg:text-base text-primary">
                                 Quality Redefined
                             </p>
                         </div>

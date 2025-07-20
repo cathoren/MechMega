@@ -4,11 +4,12 @@ import { Lightbulb, Shield, Zap, Settings } from "lucide-react";
 export interface MaterialProperties {
     name: string;
     pricePerGram: number;
-    density: number; // g/cm³
-    printSpeed: number; // mm/min
+    density: number;
+    printSpeed: number;
+
     complexityMultiplier: number;
     supportRequired: boolean;
-    postProcessingTime: number; // minutes
+    postProcessingTime: number;
 }
 
 export interface TechnologySettings {
