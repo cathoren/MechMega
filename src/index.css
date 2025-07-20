@@ -183,7 +183,7 @@
     }
 
     .saas-container {
-        @apply container mx-auto px-4 md:px-10 relative;
+        @apply container mx-auto px-4 relative;
         max-width: 2480px;
     }
 
@@ -197,7 +197,6 @@
         text-align: center;
     }
 
-    /* Responsive heading adjustments */
     @media (max-width: 640px) {
         .saas-heading {
             line-height: 1.2;
