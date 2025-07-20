@@ -3,7 +3,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, Wrench, Settings, Target, Shield } from "lucide-react";
+import { ArrowLeft, Settings, Target, Shield } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const MetalTechnology = () => {
     return (
@@ -13,13 +14,12 @@ const MetalTechnology = () => {
                 <section className="saas-section">
                     <div className="saas-container">
                         <div className="max-w-4xl mx-auto">
-                            <Button
-                                variant="ghost"
-                                className="mb-8 text-muted-foreground hover:text-foreground"
-                                onClick={() => window.history.back()}>
+                            <Link
+                                to="/technologies"
+                                className="mb-4 inline-flex items-center text-sm text-primary hover:underline">
                                 <ArrowLeft className="w-4 h-4 mr-2" />
                                 Back to Technologies
-                            </Button>
+                            </Link>
 
                             <div className="text-center mb-12">
                                 <h1 className="saas-heading mb-4">

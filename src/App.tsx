@@ -22,6 +22,7 @@ import ProfilePage from "./pages/ProfilePage";
 import NetworkStatus from "./components/NetworkStatus";
 import ConnectionStatus from "@/components/ConnectionStatus";
 import LoadingScreen from "@/components/LoadingScreen";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -37,6 +38,7 @@ const AppContent = () => {
             <NetworkStatus />
             <ConnectionStatus />
             <BrowserRouter>
+                <ScrollToTop />
                 <Routes>
                     <Route
                         path="/"
