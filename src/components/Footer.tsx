@@ -84,11 +84,17 @@ const Footer = () => {
                             <p className="text-sm md:text-base">
                                 connect@MechMega.com
                             </p>
-                            <p className="text-sm md:text-base">
-                                Professional 3D Printing Services
+                        </div>
+                        <div>
+                            <p className="text-muted-foreground">
+                                TBI, Technology Tower
+                                <br />
+                                VIT Vellore
+                                <br />
+                                Tamilnadu, India
                             </p>
-                            <p className="text-sm md:text-base">
-                                Quote requests processed within 24 hours
+                            <p className="text-muted-foreground mt-2">
+                                +91 98765 43210
                             </p>
                         </div>
                     </div>

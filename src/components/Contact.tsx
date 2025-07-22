@@ -2,19 +2,43 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { MapPin, Phone, Mail, Clock, ExternalLink } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const Contact = () => {
+    const { toast } = useToast();
+
     const handleEmailClick = () => {
-        window.location.href = "connect@mechmega.com";
+        window.open("mailto:connect@mechmega.com", "_blank");
     };
 
-    const handlePhoneClick = () => {
-        window.location.href = "+91 62813 00977";
+    const handlePhoneClick = async () => {
+        try {
+            await navigator.clipboard.writeText("+91 62813 00977");
+            toast({
+                title: "Phone number copied!",
+                description:
+                    "The phone number has been copied to your clipboard.",
+            });
+        } catch (err) {
+            // Fallback for browsers that don't support clipboard API
+            const textArea = document.createElement("textarea");
+            textArea.value = "+91 62813 00977";
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand("copy");
+            document.body.removeChild(textArea);
+
+            toast({
+                title: "Phone number copied!",
+                description:
+                    "The phone number has been copied to your clipboard.",
+            });
+        }
     };
 
     const handleMapClick = () => {
         window.open(
-            "https://maps.google.com?q=123+Innovation+Drive,+Tech+Valley,+CA+94043",
+            "https://maps.google.com?q=TBI+Technology+Tower+VIT+Vellore+Tamil+Nadu+India",
             "_blank"
         );
     };
@@ -75,6 +99,7 @@ const Contact = () => {
                                 </Button>
                             </CardContent>
                         </Card>
+
                         <Card className="hover:shadow-lg transition-shadow duration-300 tech-card">
                             <CardHeader>
                                 <CardTitle className="flex items-center gap-3 text-primary text-lg md:text-xl">
@@ -85,12 +110,8 @@ const Contact = () => {
                             <CardContent>
                                 <div className="space-y-2 text-muted-foreground text-sm md:text-base">
                                     <div className="flex justify-between">
-                                        <span>Monday - Friday:</span>
-                                        <span>8:00 AM - 6:00 PM PST</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>Saturday:</span>
-                                        <span>9:00 AM - 4:00 PM PST</span>
+                                        <span>Monday - Saturday:</span>
+                                        <span>8:00 AM - 6:00 PM IST</span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span>Sunday:</span>
@@ -114,15 +135,12 @@ const Contact = () => {
                             </CardHeader>
                             <CardContent className="space-y-6">
                                 <div>
-                                    <h4 className="font-semibold mb-2">
-                                        MechMega Innovation Center
-                                    </h4>
                                     <p className="text-muted-foreground">
                                         TBI, Technology Tower
                                         <br />
                                         VIT Vellore
                                         <br />
-                                        Tamilnadu, India
+                                        Tamil Nadu, India
                                     </p>
                                 </div>
 

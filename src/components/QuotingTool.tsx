@@ -509,30 +509,6 @@ const QuotingTool = () => {
                     </p>
                 </div>
 
-                {/* Quote Mode Toggle */}
-                <div className="flex justify-center mb-8">
-                    <div className="bg-secondary/10 rounded-lg p-1 flex gap-4">
-                        <Button
-                            variant={
-                                quoteMode === "simple" ? "default" : "ghost"
-                            }
-                            onClick={() => setQuoteMode("simple")}
-                            className="flex items-center gap-2">
-                            <Wand2 className="w-4 h-4" />
-                            Simple Quote
-                        </Button>
-                        <Button
-                            variant={
-                                quoteMode === "advanced" ? "default" : "ghost"
-                            }
-                            onClick={() => setQuoteMode("advanced")}
-                            className="flex items-center gap-2">
-                            <Settings className="w-4 h-4" />
-                            Advanced Quote
-                        </Button>
-                    </div>
-                </div>
-
                 {quoteMode === "simple" ? (
                     /* Simple Quote Mode */
                     <div className="space-y-8">

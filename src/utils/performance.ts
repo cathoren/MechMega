@@ -1,4 +1,4 @@
-// Performance monitoring utilities for Firebase operations
+// Performance monitoring utilities for application operations
 
 export class PerformanceMonitor {
     private static instance: PerformanceMonitor;
