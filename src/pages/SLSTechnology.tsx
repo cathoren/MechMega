@@ -3,7 +3,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ArrowLeft, Layers, Settings, Zap, Cog, Link } from "lucide-react";
+import { ArrowLeft, Layers, Settings, Zap, Cog } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const SLSTechnology = () => {
     return (

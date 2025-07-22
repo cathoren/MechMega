@@ -3,8 +3,6 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ThemeProvider } from "@/components/ThemeProvider";
-import { AuthProvider, useAuth } from "@/hooks/use-auth";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import TechnologiesPage from "./pages/TechnologiesPage";
@@ -18,21 +16,13 @@ import MJFTechnology from "./pages/MJFTechnology";
 import PolyjetTechnology from "./pages/PolyjetTechnology";
 import MetalTechnology from "./pages/MetalTechnology";
 import TeamsPage from "./pages/TeamsPage";
-import ProfilePage from "./pages/ProfilePage";
 import NetworkStatus from "./components/NetworkStatus";
 import ConnectionStatus from "@/components/ConnectionStatus";
-import LoadingScreen from "@/components/LoadingScreen";
 import ScrollToTop from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
 const AppContent = () => {
-    const { isLoading } = useAuth();
-
-    if (isLoading) {
-        return <LoadingScreen message="Initializing MechMega..." />;
-    }
-
     return (
         <>
             <NetworkStatus />
@@ -88,10 +78,6 @@ const AppContent = () => {
                         path="/technology/metal"
                         element={<MetalTechnology />}
                     />
-                    <Route
-                        path="/profile"
-                        element={<ProfilePage />}
-                    />
                     {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                     <Route
                         path="*"
@@ -105,15 +91,11 @@ const AppContent = () => {
 
 const App = () => (
     <QueryClientProvider client={queryClient}>
-        <AuthProvider>
-            <ThemeProvider>
-                <TooltipProvider>
-                    <Toaster />
-                    <Sonner />
-                    <AppContent />
-                </TooltipProvider>
-            </ThemeProvider>
-        </AuthProvider>
+        <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <AppContent />
+        </TooltipProvider>
     </QueryClientProvider>
 );
 
